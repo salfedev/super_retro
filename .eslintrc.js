@@ -15,6 +15,10 @@ module.exports = {
     browser: true
   },
   rules: {
+    'self-closing-void-elements': "off",
+    'attribute-indentation': "off",
+    'no-partial': "off",
+    'no-html-comments': "off"
   },
   overrides: [
     // node files
