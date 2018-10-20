@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 import {computed, observer} from '@ember/object';
-import { empty } from '@ember/object/computed';
+import { empty, match } from '@ember/object/computed';
 export default Controller.extend({
   isDisabled: empty('emailAddress'),
+  isValid: match('emailAddress', /^.+@.+\..+$/),
   emailAddress: '',
   actualEmailAddress: computed('emailAddress', function() {
     // Called only when you go and use that property
