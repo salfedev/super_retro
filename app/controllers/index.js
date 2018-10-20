@@ -1,8 +1,8 @@
 import Controller from '@ember/controller';
 import {computed, observer} from '@ember/object';
-import { empty, match } from '@ember/object/computed';
+import { not, match } from '@ember/object/computed';
 export default Controller.extend({
-  isDisabled: empty('emailAddress'),
+  isDisabled: not('isValid'),
   isValid: match('emailAddress', /^.+@.+\..+$/),
   emailAddress: '',
   actualEmailAddress: computed('emailAddress', function() {
