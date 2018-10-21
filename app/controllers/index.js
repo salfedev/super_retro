@@ -25,7 +25,7 @@ export default Controller.extend({
   actions: {
     saveInvitation() {
       const email = this.get('emailAddress');
-      const invitationRequest = this.store.createRecord('invitation', {email: email});
+      const invitationRequest = this.store.createRecord('invitation', {email});
       invitationRequest.save()
         .then(response => {
           //eslint-disable-next-line
@@ -37,6 +37,9 @@ export default Controller.extend({
           //eslint-disable-next-line
           console.log("Error saving invitation: ", error);
         });
+    },
+    dismissAlert() {
+      this.set('responseMessage', false)
     }
   }
 });
