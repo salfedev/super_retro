@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
-import {computed} from '@ember/object';
-import {not, match, gte} from '@ember/object/computed';
+import {not, match, gte, and} from '@ember/object/computed';
 
 export default Controller.extend({
   emailAddress: '',
@@ -8,9 +7,7 @@ export default Controller.extend({
   isDisabled: not('isFormValid'),
   isEmailValid: match('emailAddress', /^.+@.+\..+$/),
   isMessageValid: gte('messageBody.length', 20),
-  isFormValid: computed('isEmailValid', 'messageBody', function() {
-    return this.get('isEmailValid') && this.get('isMessageValid');
-  }),
+  isFormValid: and('isEmailValid', 'isMessageValid'),
   actions: {
     sendMessage() {
       // alert(`Creating issue now using username: ${this.get('emailAddress')}`);
