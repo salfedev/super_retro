@@ -30,6 +30,8 @@
   </div>
 
   {{#if responseMessage}}
-    <div class="alert alert-success">{{responseMessage}}</div>
+    <div class="alert alert-success" onClick={{action "dismissAlert"}}>
+      <i class="glyphicon glyphicon-check" aria-hidden="true"></i> {{responseMessage}}
+    </div>
   {{/if}}
 </div>
