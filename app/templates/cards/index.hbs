@@ -1,0 +1,13 @@
+<h2>List</h2>
+
+{{#each model as |card|}}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{card.author}}</h3>
+    </div>
+    <div class="panel-body">
+      <p>Address: {{card.text}}</p>
+      <p>Phone: {{card.votes}}</p>
+    </div>
+  </div>
+{{/each}}
