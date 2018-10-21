@@ -24,7 +24,7 @@
         value=messageBody
         type="email"
         class="form-control mt-2 mb-30"
-        placeholder="Please describe the feature(s) you would like to see added to Super Retro"
+        placeholder="Please describe the feature(s) you would like to see added to Super Retro (20 characters minimum)"
         autofocus="autofocus"
       }}
     </div>
@@ -35,11 +35,15 @@
       <button
         disabled={{isDisabled}}
         class="btn btn-primary btn-lg btn-block mt-20"
-        {{action "saveInvitation"}}
+        {{action "sendMessage"}}
       >
         Send
       </button>
     </div>
-
   </div>
+  {{#if responseMessage}}
+    <div class="alert alert-success" onClick={{action "dismissAlert"}}>
+      <i class="glyphicon glyphicon-check" aria-hidden="true"></i> {{responseMessage}}
+    </div>
+  {{/if}}
 </div>
