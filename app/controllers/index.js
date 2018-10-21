@@ -24,11 +24,19 @@ export default Controller.extend({
 
   actions: {
     saveInvitation() {
-      const email = this.get('email');
+      const email = this.get('emailAddress');
       const invitationRequest = this.store.createRecord('invitation', {email: email});
-      invitationRequest.save();
-      this.set('responseMessage', `Thank you! We've just saved your email address: ${this.get('emailAddress')}`);
-      this.set('emailAddress', '');
+      invitationRequest.save()
+        .then(response => {
+          //eslint-disable-next-line
+          console.log('Invitation saved: ', response)
+          this.set('responseMessage', `Thank you! We have just saved your email address: ${this.get('emailAddress')}`);
+          this.set('emailAddress', '');
+        })
+        .catch(error => {
+          //eslint-disable-next-line
+          console.log("Error saving invitation: ", error);
+        });
     }
   }
 });
