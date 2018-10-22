@@ -16,6 +16,7 @@ Router.map(function() {
 
   this.route('cards', function() {
     this.route('new');
+    this.route('edit', {path: '/:card_id/edit'});
   });
 });
 
