@@ -26,7 +26,7 @@ export default Controller.extend({
       this.set('messageBody', '');
     },
     dismissAlert() {
-      this.set('responseMessage', false)
+      this.set('responseMessage', false);
     }
   }
 });
