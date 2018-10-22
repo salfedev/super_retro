@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   model(params) {
-    this.store.findRecord('card', params.card_id);
+    return this.store.findRecord('card', params.card_id);
   },
   actions: {
     saveCard(card) {
@@ -11,7 +11,7 @@ export default Route.extend({
     willTransition(transition) {
       let model = this.controller.get('model');
       if (model.get("hasDirtyAttributes")) {
-        let confirmation = confirm("Your changes haven't saved yet. Would you like to leave this page?");
+        let confirmation = confirm("Your changes haven't saved yet. Would you like to leave this page?"); //This triggers an alert and waits for user's input
         if (confirmation) {
           model.rollbackAttributes();
         } else {
