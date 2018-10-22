@@ -1,0 +1,22 @@
+<h2>{{columnHeader}}</h2>
+
+<div class="row">
+  {{#each model as |card|}}
+    <div class="col-md-4">
+      <div class="panel panel-default card-item">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{card.author}}</h3>
+        </div>
+        <div class="panel-body">
+          <p>{{card.text}}</p>
+          <p>Votes: {{card.votes}}</p>
+        </div>
+        <div class="panel-footer text-right">
+          {{#link-to "cards.edit" card.id class="btn btn-success btn-xs"}}Edit{{/link-to}}
+          <button class="btn btn-danger btn-xs" {{action "deleteCard" card}}>Delete</button>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
+{{outlet}}
