@@ -39,7 +39,7 @@ export default Controller.extend({
         });
     },
     dismissAlert() {
-      this.set('responseMessage', false)
+      this.set('responseMessage', false);
     }
   }
 });
