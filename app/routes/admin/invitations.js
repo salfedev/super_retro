@@ -10,6 +10,22 @@ export default Route.extend({
       if (confirmation) {
         invitation.destroyRecord();
       }
+    },
+    allowUser(invitation) {
+      invitation.set('allowed', true);
+      invitation.save()
+        .then(response => {
+            //eslint-disable-next-line
+            console.log('Invitation saved: ', response)
+            this.set('responseMessage', `User <strong>${this.get('emailAddress')}</strong> was added to the board`);
+          })
+          .catch(error => {
+            //eslint-disable-next-line
+            console.log("Error saving invitation: ", error);
+          });
+    },
+    dismissAlert() {
+      this.set('responseMessage', false);
     }
   }
 });
