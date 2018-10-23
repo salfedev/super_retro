@@ -1,5 +1,11 @@
 <h1>Invitations</h1>
+
 <div class="col-md-6 col-md-offset-3">
+  {{#if responseMessage}}
+    <div class="alert alert-success" onClick={{action "dismissAlert"}}>
+      <i class="glyphicon glyphicon-check" aria-hidden="true"></i> {{responseMessage}}
+    </div>
+  {{/if}}
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
@@ -10,18 +16,49 @@
     </thead>
     <tbody>
       {{#each model as |invitation|}}
-        <tr>
-          <td>{{invitation.id}}</td>
-          <td>{{invitation.email}}</td>
-          <td>
-            <button class="btn btn-success">
-              Allow
-            </button>
-            <button class="btn btn-danger" {{action "deleteInvitation" invitation}}>
-              Delete
-            </button>
-          </td>
-        </tr>
+        {{#unless invitation.allowed}}
+          <tr>
+            <td>{{invitation.id}}</td>
+            <td>{{invitation.email}}</td>
+            <td>
+              <button class="btn btn-success" {{action "allowUser" invitation}}>
+                Allow
+              </button>
+              <button class="btn btn-danger" {{action "deleteInvitation" invitation}}>
+                Delete
+              </button>
+            </td>
+          </tr>
+        {{/unless}}
+      {{/each}}
+    </tbody>
+  </table>
+
+  <h2>Accepted invitations</h2>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>E-mail</th>
+        <th>Allow</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |invitation|}}
+        {{#if invitation.allowed}}
+          <tr>
+            <td>{{invitation.id}}</td>
+            <td>{{invitation.email}}</td>
+            <td>
+              <button class="btn btn-success">
+                Allow
+              </button>
+              <button class="btn btn-danger" {{action "deleteInvitation" invitation}}>
+                Delete
+              </button>
+            </td>
+          </tr>
+        {{/if}}
       {{/each}}
     </tbody>
   </table>
