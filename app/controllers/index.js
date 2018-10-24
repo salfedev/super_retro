@@ -1,7 +1,9 @@
 import Controller from '@ember/controller';
 import {computed, observer} from '@ember/object';
 import { not, match } from '@ember/object/computed';
-export default Controller.extend({
+import FindQuery from 'ember-emberfire-find-query/mixins/find-query';
+
+export default Controller.extend(FindQuery, {
   headerMessage: "Welcome to Super Retro.",
 
   isDisabled: not('isValid'),
@@ -25,21 +27,28 @@ export default Controller.extend({
   actions: {
     saveInvitation() {
       const email = this.get('emailAddress');
-      const invitationRequest = this.store.createRecord('invitation', {email});
-      invitationRequest.save()
-        .then(response => {
-          //eslint-disable-next-line
-          console.log('Invitation saved: ', response)
-          this.set('responseMessage', `Thank you! We have just saved your email address: ${this.get('emailAddress')}`);
+      this.filterEqual(this.store, 'invitation', {email: email}, (invitation) => {
+        if (invitation.firstObject) {
+          this.set('responseMessage', `An invite was sent to: ${this.get('emailAddress')} earlier and pending approval`);
           this.set('emailAddress', '');
-        })
-        .catch(error => {
-          //eslint-disable-next-line
-          console.log("Error saving invitation: ", error);
-        });
+        } else {
+          const invitationRequest = this.store.createRecord('invitation', {email});
+          invitationRequest.save()
+            .then(response => {
+              //eslint-disable-next-line
+              console.log('Invitation saved: ', response)
+              this.set('responseMessage', `Thank you! We have just saved your email address: ${this.get('emailAddress')}`);
+              this.set('emailAddress', '');
+            })
+            .catch(error => {
+              //eslint-disable-next-line
+              console.log("Error saving invitation: ", error);
+            });
+        }
+      });
     },
     dismissAlert() {
-      this.set('responseMessage', false)
+      this.set('responseMessage', false);
     }
   }
 });
