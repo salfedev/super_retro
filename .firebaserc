@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "emberfire-base"
+    "default": "emberfire-base",
+    "superretro": "super-retro"
   }
 }
