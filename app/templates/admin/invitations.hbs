@@ -1,18 +1,63 @@
 <h1>Invitations</h1>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>E-mail</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each model as |invitation|}}
+<div class="col-md-6 col-md-offset-3">
+  {{log "invitationMessage" invitationMessage}}
+  {{#if invitationMessage}}
+    <div class="alert alert-success" {{action "dismissMessage" on="click"}}>
+      <i class="glyphicon glyphicon-check" aria-hidden="true"></i> {{invitationMessage}}
+    </div>
+  {{/if}}
+  <table class="table table-bordered table-striped">
+    <thead>
       <tr>
-        <th>{{invitation.id}}</th>
-        <td>{{invitation.email}}</td>
+        <th>ID</th>
+        <th>E-mail</th>
+        <th>Allow</th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each model as |invitation|}}
+        {{#unless invitation.allowed}}
+          <tr>
+            <td>{{invitation.id}}</td>
+            <td>{{invitation.email}}</td>
+            <td>
+              <button class="btn btn-success" {{action "allowUser" invitation}}>
+                Allow
+              </button>
+              <button class="btn btn-danger" {{action "deleteInvitation" invitation}}>
+                Delete
+              </button>
+            </td>
+          </tr>
+        {{/unless}}
+      {{/each}}
+    </tbody>
+  </table>
+
+  <h2>Accepted invitations</h2>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>E-mail</th>
+        <th>Allow</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |invitation|}}
+        {{#if invitation.allowed}}
+          <tr>
+            <td>{{invitation.id}}</td>
+            <td>{{invitation.email}}</td>
+            <td>
+              <button class="btn btn-danger" {{action "revokeInvitation" invitation}}>
+                Revoke
+              </button>
+            </td>
+          </tr>
+        {{/if}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>

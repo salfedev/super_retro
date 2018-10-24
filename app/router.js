@@ -13,6 +13,11 @@ Router.map(function() {
   this.route('admin', function() {
     this.route('invitations');
   });
+
+  this.route('cards', function() {
+    this.route('new');
+    this.route('edit', {path: '/:card_id/edit'});
+  });
 });
 
 export default Router;
