@@ -1,7 +1,6 @@
 <h1>Invitations</h1>
 
 <div class="col-md-6 col-md-offset-3">
-  {{log "invitationMessage" invitationMessage}}
   {{#if invitationMessage}}
     <div class="alert alert-success" {{action "dismissMessage" on="click"}}>
       <i class="glyphicon glyphicon-check" aria-hidden="true"></i> {{invitationMessage}}
@@ -21,7 +20,7 @@
           <tr>
             <td>{{invitation.id}}</td>
             <td>{{invitation.email}}</td>
-            <td>
+            <td class="text-center">
               <button class="btn btn-success" {{action "allowUser" invitation}}>
                 Allow
               </button>
@@ -50,7 +49,7 @@
           <tr>
             <td>{{invitation.id}}</td>
             <td>{{invitation.email}}</td>
-            <td>
+            <td class="text-center">
               <button class="btn btn-danger" {{action "revokeInvitation" invitation}}>
                 Revoke
               </button>
